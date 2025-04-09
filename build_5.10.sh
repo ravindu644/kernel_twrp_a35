@@ -16,6 +16,9 @@ export ANDROID_MAJOR_VERSION=t
 export DEPMOD=depmod
 export TARGET_SOC=s5e8835
 
+# Import gofile uploader
+source "${KERNEL_ROOT}/gofile-upload.sh"
+
 # Install the requirements for building the kernel when running the script for the first time
 if [ ! -f ".requirements" ]; then
     sudo apt update && sudo apt install -y git device-tree-compiler lz4 xz-utils zlib1g-dev openjdk-17-jdk gcc g++ python3 python-is-python3 p7zip-full android-sdk-libsparse-utils erofs-utils \
@@ -82,4 +85,13 @@ build_kernel(){
 
     echo -e "\n[INFO]: BUILD FINISHED..!"
 }
+
+upload_kernel(){
+    cd "${KERNEL_ROOT}/build"
+    zip -9 "permissive-kernel-twrp-A35.zip" "Image"
+    upload_to_gofile "permissive-kernel-twrp-A35.zip"
+    cd "${KERNEL_ROOT}"
+}
+
 build_kernel
+upload_kernel
