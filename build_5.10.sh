@@ -9,6 +9,13 @@ export KERNEL_ROOT="$(pwd)"
 export ARCH=arm64
 export KBUILD_BUILD_USER="@ravindu644"
 
+# OEM Variables from build_kernel.sh
+export DTC_FLAGS="-@"
+export PLATFORM_VERSION=13
+export ANDROID_MAJOR_VERSION=t
+export DEPMOD=depmod
+export TARGET_SOC=s5e8835
+
 # Install the requirements for building the kernel when running the script for the first time
 if [ ! -f ".requirements" ]; then
     sudo apt update && sudo apt install -y git device-tree-compiler lz4 xz-utils zlib1g-dev openjdk-17-jdk gcc g++ python3 python-is-python3 p7zip-full android-sdk-libsparse-utils erofs-utils \
